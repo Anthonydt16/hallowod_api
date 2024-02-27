@@ -7,7 +7,6 @@ import { DataSource, Repository } from 'typeorm';
 import { WodPart } from '../wod_part/entities/wod_part.entity';
 import { Workout } from '../workout/entities/workout.entity';
 import { Exercise } from '../exercises/entities/exercise.entity';
-import { cp } from 'fs';
 
 @Injectable()
 export class WodPartExerciseService {
