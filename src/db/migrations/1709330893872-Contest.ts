@@ -1,16 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export enum RoleEnum {
-  ADMIN = 'admin',
-  USER = 'user',
-  Owner = 'owner',
-}
-
-export class Users1636917857168 implements MigrationInterface {
+export class Contest1709330893872 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'contest',
         columns: [
           {
             name: 'id',
@@ -19,26 +13,12 @@ export class Users1636917857168 implements MigrationInterface {
             generationStrategy: 'uuid',
           },
           {
-            name: 'first_name',
+            name: 'name',
             type: 'varchar',
           },
           {
-            name: 'last_name',
-            type: 'varchar',
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true,
-          },
-          {
-            name: 'password',
-            type: 'varchar',
-          },
-          {
-            name: 'token',
-            type: 'varchar',
-            isNullable: true,
+            name: 'description',
+            type: 'text',
           },
           {
             name: 'created_at',
@@ -46,9 +26,21 @@ export class Users1636917857168 implements MigrationInterface {
             default: 'now()',
           },
           {
-            name: 'role',
-            type: 'enum',
-            enum: [RoleEnum.ADMIN, RoleEnum.USER, RoleEnum.Owner],
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'date',
+            type: 'timestamp',
+          },
+          {
+            name: 'gps_coordinates',
+            type: 'varchar',
           },
         ],
       }),
@@ -56,6 +48,6 @@ export class Users1636917857168 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('contest');
   }
 }
