@@ -8,6 +8,13 @@ import { LoggerModule } from './logger/logger.module';
 import { AsyncStorageMiddleware } from './global/middleware/async-storage/async-storage.middleware';
 import { GlobalModule } from './global/global.module';
 import { HealthModule } from './health/health.module';
+import { ContestModule } from './contest/contest.module';
+import { WorkoutModule } from './workout/workout.module';
+import { PartWorkoutModule } from './part_workout/part_workout.module';
+import { CategoryModule } from './category/category.module';
+import { ExerciseModule } from './exercise/exercise.module';
+import { TeamModule } from './team/team.module';
+import { TeamUserModule } from './team_user/team_user.module';
 @Module({
   imports: [
     GlobalModule,
@@ -21,6 +28,13 @@ import { HealthModule } from './health/health.module';
     ConfigModule,
     LoggerModule,
     HealthModule,
+    ContestModule,
+    WorkoutModule,
+    PartWorkoutModule,
+    CategoryModule,
+    ExerciseModule,
+    TeamModule,
+    TeamUserModule,
   ],
 })
 export class AppModule {
