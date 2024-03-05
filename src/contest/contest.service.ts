@@ -25,7 +25,10 @@ export class ContestService {
     return this.contestRepository.findOneBy({ id });
   }
 
-  async update(id: string, updateContestDto: UpdateContestDto): Promise<ContestEntity | null> {
+  async update(
+    id: string,
+    updateContestDto: UpdateContestDto,
+  ): Promise<ContestEntity | null> {
     await this.contestRepository.update(id, updateContestDto);
     return this.contestRepository.findOneBy({ id });
   }

@@ -1,12 +1,11 @@
-import { ContestEntity } from 'src/contest/entities/contest.entity';
-import { ExerciseEntity } from 'src/exercise/entities/exercise.entity';
-import { TeamEntity } from 'src/team/entities/team.entity';
-import { BaseModel } from 'src/utils/baseModel';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
+import { ContestEntity } from '../../contest/entities/contest.entity';
+import { ExerciseEntity } from '../../exercise/entities/exercise.entity';
+import { TeamEntity } from '../../team/entities/team.entity';
+import { BaseModel } from '../../utils/baseModel';
+import { Entity, Column, OneToMany, ManyToOne } from 'typeorm';
 
 @Entity('category')
 export class CategoryEntity extends BaseModel {
-
   @Column()
   name: string;
 
@@ -28,13 +27,12 @@ export class CategoryEntity extends BaseModel {
   @Column('uuid')
   contestId: string;
 
-  @OneToMany(() => ContestEntity, (contest) => contest.categorys)
-    contest: ContestEntity;
+  @ManyToOne(() => ContestEntity, (contest) => contest.categorys)
+  contest: ContestEntity;
 
-    @ManyToOne(() => ExerciseEntity, (exercise) => exercise.category)
-    exercises: ExerciseEntity[];
+  @OneToMany(() => ExerciseEntity, (exercise) => exercise.category)
+  exercises: ExerciseEntity[];
 
-    @ManyToOne(() => TeamEntity, (team) => team.category)
-    teams: TeamEntity[];
-    
+  @OneToMany(() => TeamEntity, (team) => team.category)
+  teams: TeamEntity[];
 }

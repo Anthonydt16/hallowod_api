@@ -1,8 +1,6 @@
-
-import { TeamEntity } from 'src/team/entities/team.entity';
-import { TeamUserEntity } from 'src/team_user/entities/team_user.entity';
-import { BaseModel } from 'src/utils/baseModel';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { TeamUserEntity } from '../../team_user/entities/team_user.entity';
+import { BaseModel } from '../../utils/baseModel';
+import { Entity, Column, ManyToMany } from 'typeorm';
 
 export enum RoleEnum {
   ADMIN = 'admin',
@@ -14,7 +12,6 @@ export enum RoleEnum {
   name: 'users',
 })
 export class UserEntity extends BaseModel {
-
   @Column({
     name: 'first_name',
   })

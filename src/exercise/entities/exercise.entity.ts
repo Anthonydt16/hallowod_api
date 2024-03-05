@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { BaseModel } from 'src/utils/baseModel';
-import { PartWorkoutEntity } from 'src/part_workout/entities/part_workout.entity';
-import { CategoryEntity } from 'src/category/entities/category.entity';
+import { BaseModel } from '../../utils/baseModel';
+import { PartWorkoutEntity } from '../../part_workout/entities/part_workout.entity';
+import { CategoryEntity } from '../../category/entities/category.entity';
 
 @Entity('exercise')
 export class ExerciseEntity extends BaseModel {
@@ -23,12 +23,12 @@ export class ExerciseEntity extends BaseModel {
   @Column('uuid')
   partWorkoutId: string;
 
-  @ManyToOne(() => PartWorkoutEntity, partWorkout => partWorkout.exercises)
+  @ManyToOne(() => PartWorkoutEntity, (partWorkout) => partWorkout.exercises)
   partWorkout: PartWorkoutEntity;
 
   @Column('uuid')
   categoryId: string;
 
-  @ManyToOne(() => CategoryEntity, category => category.exercises)
+  @ManyToOne(() => CategoryEntity, (category) => category.exercises)
   category: CategoryEntity;
 }

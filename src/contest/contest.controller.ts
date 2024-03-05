@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ContestService } from './contest.service';
 import { CreateContestDto } from './dto/create-contest.dto';
 import { UpdateContestDto } from './dto/update-contest.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('contest')
 @Controller('contest')
 export class ContestController {
   constructor(private readonly contestService: ContestService) {}
@@ -19,7 +29,7 @@ export class ContestController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.contestService.findOne(id)
+    return this.contestService.findOne(id);
   }
 
   @Patch(':id')

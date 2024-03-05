@@ -1,18 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { WorkoutEntity } from 'src/workout/entities/workout.entity';
-import { BaseModel } from 'src/utils/baseModel';
-import { ExerciseEntity } from 'src/exercise/entities/exercise.entity';
+import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
+import { BaseModel } from '../../utils/baseModel';
+import { ExerciseEntity } from '../../exercise/entities/exercise.entity';
+import { WorkoutEntity } from '../../workout/entities/workout.entity';
 export enum typePartWorkout {
-    FORTIME = 'FORTIME',
-    AMRAP = 'AMRAP',
-    EMOM = 'EMOM',
-    INTERVAL = 'INTERVAL',
-    TABATA = 'TABATA',
-  }
+  FORTIME = 'FORTIME',
+  AMRAP = 'AMRAP',
+  EMOM = 'EMOM',
+  INTERVAL = 'INTERVAL',
+  TABATA = 'TABATA',
+}
 
 @Entity('part_workout')
 export class PartWorkoutEntity extends BaseModel {
-
   @Column()
   name: string;
 
@@ -22,7 +21,7 @@ export class PartWorkoutEntity extends BaseModel {
   @Column('uuid')
   workoutId: string;
 
-  @ManyToOne(() => WorkoutEntity, workout => workout.partWorkouts)
+  @ManyToOne(() => WorkoutEntity, (workout) => workout.partWorkouts)
   workout: WorkoutEntity;
 
   @Column({

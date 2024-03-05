@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../../entities/user.entity';
+import { RoleEnum, UserEntity } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { PasswordService } from '../password/password.service';
@@ -29,6 +29,7 @@ export class UserService {
       firstName: userDto.firstName,
       lastName: userDto.lastName,
       passwordHash: await this.passwordService.generate(userDto.password),
+      role: userDto?.role || RoleEnum.USER,
     };
 
     let newUser = this.usersRepository.create(userPayload);

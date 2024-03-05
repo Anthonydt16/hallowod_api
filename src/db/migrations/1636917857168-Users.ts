@@ -1,7 +1,12 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 import { RoleEnum } from '../../user/entities/user.entity';
-import { typePartWorkout } from 'src/part_workout/entities/part_workout.entity';
+import { typePartWorkout } from '../../part_workout/entities/part_workout.entity';
 
 export class Users1636917857168 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -14,6 +19,8 @@ export class Users1636917857168 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'first_name',
@@ -60,6 +67,8 @@ export class Users1636917857168 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -104,6 +113,8 @@ export class Users1636917857168 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -139,6 +150,8 @@ export class Users1636917857168 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -190,6 +203,8 @@ export class Users1636917857168 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -233,169 +248,140 @@ export class Users1636917857168 implements MigrationInterface {
         ],
       }),
     );
-    
-  await queryRunner.createTable(
-    new Table({
-      name: 'exercise',
-      columns: [
-        {
-          name: 'id',
-          type: 'uuid',
-          isPrimary: true,
-          generationStrategy: 'uuid',
-        },
-        {
-          name: 'name',
-          type: 'varchar',
-        },
-        {
-          name: 'description',
-          type: 'text',
-        },
-        {
-          name: 'created_at',
-          type: 'timestamp',
-          default: 'now()',
-        },
-        {
-          name: 'deleted_at',
-          type: 'timestamp',
-          isNullable: true,
-        },
-        {
-          name: 'part_workout_id',
-          type: 'uuid',
-        },
-        {
-          name: 'category_id',
-          type: 'uuid',
-        },
-      ],
-    }),
-  );
-  await queryRunner.createTable(
-    new Table({
-      name: 'team',
-      columns: [
-        {
-          name: 'id',
-          type: 'uuid',
-          isPrimary: true,
-          generationStrategy: 'uuid',
-        },
-        {
-          name: 'name',
-          type: 'varchar',
-        },
-        {
-          name: 'created_at',
-          type: 'timestamp',
-          default: 'now()',
-        },
-        {
-          name: 'deleted_at',
-          type: 'timestamp',
-          isNullable: true,
-        },
-        {
-          name: 'contest_id',
-          type: 'uuid',
-        },
-        {
-          name: 'category_id',
-          type: 'uuid',
-        },
-      ],
-    }),
-  );
-  await queryRunner.createTable(
-    new Table({
-      name: 'team_user',
-      columns: [
-        {
-          name: 'id',
-          type: 'uuid',
-          isPrimary: true,
-          generationStrategy: 'uuid',
-        },
-        {
-          name: 'user_id',
-          type: 'uuid',
-        },
-        {
-          name: 'team_id',
-          type: 'uuid',
-        },
-        {
-          name: 'created_at',
-          type: 'timestamp',
-          default: 'now()',
-        },
-        {
-          name: 'deleted_at',
-          type: 'timestamp',
-          isNullable: true,
-        },
-      ],
-    }),
-  );
-  queryRunner.createForeignKey(
-    'team',
-    new TableForeignKey({
-      columnNames: ['team_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'team',
-      onDelete: 'CASCADE',
-    }),
-  );
-  queryRunner.createForeignKey(
-    'user',
-    new TableForeignKey({
-      columnNames: ['user_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'user',
-      onDelete: 'CASCADE',
-    }),
-  );
-  queryRunner.createForeignKey(
-    'contest',
-    new TableForeignKey({
-      columnNames: ['contest_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'contest',
-      onDelete: 'CASCADE',
-    }),
-  );
-  queryRunner.createForeignKey(
-    'category',
-    new TableForeignKey({
-      columnNames: ['category_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'category',
-      onDelete: 'CASCADE',
-    }),
-  );
-  //ajouter une clé étrangère
-  queryRunner.createForeignKey(
-    'part_workout',
-    new TableForeignKey({
-      columnNames: ['part_workout_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'part_workout',
-      onDelete: 'CASCADE',
-    }),
-  );
-  queryRunner.createForeignKey(
-    'category',
-    new TableForeignKey({
-      columnNames: ['category_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'category',
-      onDelete: 'CASCADE',
-    }),
-  );
-    queryRunner.createForeignKey(
-      'contest',
+
+    await queryRunner.createTable(
+      new Table({
+        name: 'exercise',
+        columns: [
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+          },
+          {
+            name: 'description',
+            type: 'text',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
+          {
+            name: 'part_workout_id',
+            type: 'uuid',
+          },
+          {
+            name: 'category_id',
+            type: 'uuid',
+          },
+        ],
+      }),
+    );
+    await queryRunner.createTable(
+      new Table({
+        name: 'team',
+        columns: [
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
+          {
+            name: 'contest_id',
+            type: 'uuid',
+          },
+          {
+            name: 'category_id',
+            type: 'uuid',
+          },
+        ],
+      }),
+    );
+    await queryRunner.createTable(
+      new Table({
+        name: 'team_user',
+        columns: [
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+            isGenerated: true,
+            default: 'uuid_generate_v4()',
+          },
+          {
+            name: 'user_id',
+            type: 'uuid',
+          },
+          {
+            name: 'team_id',
+            type: 'uuid',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
+        ],
+      }),
+    );
+    //écrit les clés étrangères de team_user
+    await queryRunner.createForeignKey(
+      'team_user',
+      new TableForeignKey({
+        columnNames: ['user_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users',
+        onDelete: 'CASCADE',
+      }),
+    );
+    await queryRunner.createForeignKey(
+      'team_user',
+      new TableForeignKey({
+        columnNames: ['team_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'team',
+        onDelete: 'CASCADE',
+      }),
+    );
+    //écrit les clés étrangères de team
+    await queryRunner.createForeignKey(
+      'team',
       new TableForeignKey({
         columnNames: ['contest_id'],
         referencedColumnNames: ['id'],
@@ -403,10 +389,47 @@ export class Users1636917857168 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
-
-    //rajouter la clé étrangere
-    queryRunner.createForeignKey(
-      'workout',
+    await queryRunner.createForeignKey(
+      'team',
+      new TableForeignKey({
+        columnNames: ['category_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'category',
+        onDelete: 'CASCADE',
+      }),
+    );
+    //écrit les clés étrangères de exercise
+    await queryRunner.createForeignKey(
+      'exercise',
+      new TableForeignKey({
+        columnNames: ['part_workout_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'part_workout',
+        onDelete: 'CASCADE',
+      }),
+    );
+    await queryRunner.createForeignKey(
+      'exercise',
+      new TableForeignKey({
+        columnNames: ['category_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'category',
+        onDelete: 'CASCADE',
+      }),
+    );
+    //écrit les clés étrangères de category
+    await queryRunner.createForeignKey(
+      'category',
+      new TableForeignKey({
+        columnNames: ['contest_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'contest',
+        onDelete: 'CASCADE',
+      }),
+    );
+    //écrit les clés étrangères de part_workout
+    await queryRunner.createForeignKey(
+      'part_workout',
       new TableForeignKey({
         columnNames: ['workout_id'],
         referencedColumnNames: ['id'],
@@ -414,8 +437,9 @@ export class Users1636917857168 implements MigrationInterface {
         onDelete: 'CASCADE',
       }),
     );
-    queryRunner.createForeignKey(
-      'contest',
+    //écrit les clés étrangères de workout
+    await queryRunner.createForeignKey(
+      'workout',
       new TableForeignKey({
         columnNames: ['contest_id'],
         referencedColumnNames: ['id'],
@@ -433,6 +457,6 @@ export class Users1636917857168 implements MigrationInterface {
     await queryRunner.dropTable('category');
     await queryRunner.dropTable('exercise');
     await queryRunner.dropTable('team');
-    await queryRunner.dropTable('user_team');
+    await queryRunner.dropTable('team_user');
   }
 }
