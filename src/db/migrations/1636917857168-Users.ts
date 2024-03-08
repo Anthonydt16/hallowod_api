@@ -10,6 +10,7 @@ import { typePartWorkout } from '../../part_workout/entities/part_workout.entity
 
 export class Users1636917857168 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
         name: 'users',
